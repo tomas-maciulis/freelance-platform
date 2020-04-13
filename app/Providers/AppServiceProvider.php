@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Validator::extend('greater_or_equals_to', function($attribute, $value, $parameters, $validator) {
+            $min_field = $parameters[0];
+            $data = $validator->getData();
+            $min_value = $data[$min_field];
+            return $value >= $min_value;
+        });
+
+        Validator::replacer('greater_or_equals_to', function($message, $attribute, $rule, $parameters) {
+            return str_replace(':field', str_replace('_', ' ', $parameters[0]), $message);
+        });
+    }
+}
