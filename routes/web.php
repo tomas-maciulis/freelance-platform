@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/ad/new', 'AdController@create')->name('ad.create');
-Route::post('/ad/new', 'AdController@store')->name('ad.store');
+Route::get('/ad/new', 'AdController@create')->name('ad.create')->middleware('auth');
+Route::post('/ad/new', 'AdController@store')->name('ad.store')->middleware('auth');
+Route::get('/profile', 'ProfileController@index')->name('profile.index')->middleware('auth');
+Route::post('/profile', 'ProfileController@update')->name('profile.update')->middleware('auth');
 
 Auth::routes();
 

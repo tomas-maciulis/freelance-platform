@@ -20,6 +20,7 @@ class AdController extends Controller
 
     public function store(Request $request)
     {
+        //TODO: move validator outside of the function for reusability
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:100',
             'body' => 'required|max:10000',

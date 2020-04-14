@@ -18,6 +18,8 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
+        //TODO: paginate ads
+        //TODO: toast notifications
         return view('home')
             ->with(
                 [
