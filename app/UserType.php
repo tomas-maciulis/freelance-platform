@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Gender extends Model
+class UserType extends Model
 {
     public $timestamps = False;
 

@@ -16,7 +16,7 @@ class HomeController extends Controller
         $this->ad = $ad;
     }
 
-    public function view(Request $request)
+    public function index(Request $request)
     {
         return view('home')
             ->with(

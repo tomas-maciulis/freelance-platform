@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-    @include('navbar')
+    @yield('navbar')
     <div class="app-main ignore-scrollbar-width">
         @yield('layout')
     </div>

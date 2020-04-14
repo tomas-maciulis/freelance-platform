@@ -16,7 +16,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name',
+        'last_name',
+        'gender_id',
+        'birth_date',
+        'phone_number',
+        'email',
+        'password',
     ];
 
     /**
@@ -54,6 +60,10 @@ class User extends Authenticatable
     }
 
     public function gender() {
-        return $this->hasOne('App\Gender');
+        return $this->belongsTo('App\Gender');
+    }
+
+    public function userType() {
+        return $this->belongsTo('App\UserType');
     }
 }

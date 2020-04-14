@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@view')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/ad/new', 'AdController@create')->name('ad.create');
 Route::post('/ad/new', 'AdController@store')->name('ad.store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

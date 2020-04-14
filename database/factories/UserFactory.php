@@ -4,6 +4,7 @@
 
 use App\Gender;
 use App\User;
+use App\UserType;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -36,6 +37,9 @@ $factory->define(User::class, function (Faker $faker) {
             } else {
                 return null;
             }
+        },
+        'user_type_id' => function () {
+            return UserType::where('name', 'user')->first()->id;
         },
     ];
 });
