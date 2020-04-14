@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Ad;
 use App\AdCategory;
 use App\Repositories\AdRepository;
 use Illuminate\Http\Request;
@@ -21,10 +20,9 @@ class HomeController extends Controller
         //TODO: paginate ads
         //TODO: toast notifications
         return view('home')
-            ->with(
-                [
-                    'ads' => $this->ad->getFiltered($request->all())->sortByDesc('created_at'),
-                    'adCategories' => AdCategory::all()->sortBy('name'),
-                ]);
+            ->with([
+                'ads' => $this->ad->getFiltered($request->all())->sortByDesc('created_at'),
+                'adCategories' => AdCategory::all()->sortBy('name'),
+            ]);
     }
 }
