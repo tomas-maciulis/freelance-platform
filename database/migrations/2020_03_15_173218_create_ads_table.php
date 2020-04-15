@@ -15,8 +15,7 @@ class CreateAdsTable extends Migration
     {
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
-//todo: make user_id not nullable
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedSmallInteger('ad_category_id');
             $table->string('title', 100);
             $table->text('body');

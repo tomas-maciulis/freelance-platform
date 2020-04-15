@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Ad;
 use App\AdCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AdController extends Controller
@@ -39,7 +40,9 @@ class AdController extends Controller
                 ->withInput();
         }
 
-        Ad::create($request->except('_token'));
+        $adData = $request->except('_token');
+        $adData['user_id'] = Auth::user()->id;
+        Ad::create($adData);
 
         return redirect(route('home'));
     }
