@@ -19,11 +19,11 @@ class ProfileController extends Controller
     {
         //TODO:email validation
         return Validator::make($data, [
-            'first_name' => ['string', 'max:255'],
-            'last_name' => ['string', 'max:255'],
-            'phone_number' => ['string', 'max:50'],
-            'gender_id' => ['exists:genders,id'],
-            'birth_date' => ['date'],
+            'first_name' => ['string', 'max:255', 'nullable'],
+            'last_name' => ['string', 'max:255', 'nullable'],
+            'phone_number' => ['string', 'max:50', 'nullable'],
+            'gender_id' => ['exists:genders,id', 'nullable'],
+            'birth_date' => ['date', 'nullable'],
         ]);
     }
 
@@ -60,9 +60,9 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        //TODO improve code quality
         $profile = Auth::user();
 
+        //TODO refactor validation to a cleaner solution
         $requestData = $request->all();
         $birthYear = $request->birth_year;
         $birthMonth = $request->birth_month;
@@ -71,6 +71,8 @@ class ProfileController extends Controller
         if ($birthYear && $birthMonth && $birthDay) {
             $birthDate = $birthYear . '-' . $birthMonth . '-' . $birthDay;
             $requestData['birth_date'] = $birthDate;
+        } elseif (!$birthYear && !$birthMonth && !$birthDay){
+            $requestData['birth_date'] = null;
         }
 
         $validator = $this->validator($requestData);
