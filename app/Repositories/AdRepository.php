@@ -22,7 +22,7 @@ class AdRepository extends Repository implements AdInterface
         return $this->ad
             ->where( function ($query) use ($attributes) {
                 if (isset($attributes['category'])) {
-                    $query->where('ad_category_id', '=', $attributes['category']);
+                    $query->where('work_category_id', '=', $attributes['category']);
                 }
             })
             ->where('price_floor', '>=', isset($attributes['min_pay']) ? $attributes['min_pay'] : 0)
