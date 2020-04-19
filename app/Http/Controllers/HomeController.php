@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\AdCategory;
+use App\WorkCategory;
 use App\Repositories\AdRepository;
 use Illuminate\Http\Request;
 
@@ -22,7 +22,7 @@ class HomeController extends Controller
         return view('home')
             ->with([
                 'ads' => $this->ad->getFiltered($request->all())->sortByDesc('created_at'),
-                'adCategories' => AdCategory::all()->sortBy('name'),
+                'adCategories' => WorkCategory::all()->sortBy('name'),
             ]);
     }
 }

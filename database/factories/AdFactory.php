@@ -3,7 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Ad;
-use App\AdCategory;
+use App\WorkCategory;
 use App\User;
 use Faker\Generator as Faker;
 
@@ -17,7 +17,7 @@ $factory->define(Ad::class, function (Faker $faker) {
         'price_floor' => $priceFloor,
         'price_ceiling' => $priceCeiling,
         'user_id' => User::all()->random(1)->first()->id,
-        'ad_category_id' => AdCategory::all()->random(1)->first()->id,
+        'work_category_id' => WorkCategory::all()->random(1)->first()->id,
         'active_for' => $faker->numberBetween(1, 30),
         'created_at' => $faker->dateTimeBetween(now()->subDays(60), now()),
     ];
