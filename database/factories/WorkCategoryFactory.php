@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\AdCategory;
+use App\WorkCategory;
 use Faker\Generator as Faker;
 
-$factory->define(AdCategory::class, function (Faker $faker) {
+$factory->define(WorkCategory::class, function (Faker $faker) {
     return [
         'name' => $faker->unique()->jobTitle(),
     ];
