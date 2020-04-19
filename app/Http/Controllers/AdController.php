@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
-use App\AdCategory;
+use App\WorkCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,7 +14,7 @@ class AdController extends Controller
         return view('ad.create')
             ->with(
                 [
-                    'adCategories' => AdCategory::all()->sortBy('name'),
+                    'workCategories' => WorkCategory::all()->sortBy('name'),
                 ]);
     }
 
@@ -23,7 +23,7 @@ class AdController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:100',
             'body' => 'required|max:10000',
-            'ad_category_id' => 'exists:ad_categories,id',
+            'work_category_id' => 'exists:work_categories,id',
             'price_floor' => 'required|numeric|between:0.00,99999999.99',
             'price_ceiling' => [
                 'required',

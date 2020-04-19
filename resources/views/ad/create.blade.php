@@ -6,10 +6,10 @@
     <form method="post" action="{{ route('ad.store') }}">
         @csrf
         <input class="w-full h-8 border-gray-300 border-2 mb-3" placeholder="Title" type="text" id="title" name="title" value="{{ old('title')}}">
-        <select class="w-full border-gray-300 border-2 bg-white mb-3" id="ad_category_id" name="ad_category_id">
+        <select class="w-full border-gray-300 border-2 bg-white mb-3" id="work_category_id" name="work_category_id">
             <option value="">Category</option>
-            @foreach($adCategories as $adCategory)
-                <option value="{{ $adCategory->id }}" @if($adCategory->id == old('ad_category_id')) selected @endif>{{ $adCategory->name }}</option>
+            @foreach($workCategories as $workCategory)
+                <option value="{{ $workCategory->id }}" @if($workCategory->id == old('work_category_id')) selected @endif>{{ $workCategory->name }}</option>
             @endforeach
         </select>
         <select class="w-full border-gray-300 border-2 bg-white mb-3" id="active_for" name="active_for">
