@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePrivateMessagesTable extends Migration
+class
+CreatePrivateMessagesTable extends Migration
 {
     /**
      * Run the migrations.

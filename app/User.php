@@ -3,12 +3,14 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
 
     protected $dates = ['birth_date'];
     /**
@@ -66,5 +68,10 @@ class User extends Authenticatable
 
     public function userType() {
         return $this->belongsTo('App\UserType');
+    }
+
+    public function Cvs()
+    {
+        return $this->hasMany('App\Cv');
     }
 }

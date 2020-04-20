@@ -17,7 +17,7 @@ class Ad extends Model
     }
 
     public function category() {
-        return $this->hasOne('App\AdCategory');
+        return $this->hasOne('App\WorkCategory');
     }
 
     public function remembered() {
