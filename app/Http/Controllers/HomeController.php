@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    protected $ad;
+    protected $adRepository;
 
-    public function __construct(AdRepository $ad)
+    public function __construct(AdRepository $adRepository)
     {
-        $this->ad = $ad;
+        $this->adRepository = $adRepository;
     }
 
     public function index(Request $request)
@@ -21,7 +21,7 @@ class HomeController extends Controller
         //TODO: toast notifications
         return view('home')
             ->with([
-                'ads' => $this->ad->getFiltered($request->all())->sortByDesc('created_at'),
+                'ads' => $this->adRepository->getFiltered($request->all())->sortByDesc('created_at'),
                 'adCategories' => WorkCategory::all()->sortBy('name'),
             ]);
     }

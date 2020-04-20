@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Validator;
 
 class AdController extends Controller
 {
+    public function view(Request $request)
+    {
+        $ad = Ad::where('id', $request->id)->firstOrFail();
+
+        return view('ad.view')
+            ->with([
+                'ad' => $ad,
+            ]);
+    }
+
     public function create(Request $request)
     {
         return view('ad.create')

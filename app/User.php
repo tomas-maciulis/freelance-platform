@@ -42,9 +42,20 @@ class User extends Authenticatable
      *
      * @var array
      */
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return "$this->first_name $this->last_name";
+    }
 
     public function ads() {
         return $this->hasMany('App\Ad');
@@ -70,7 +81,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\UserType');
     }
 
-    public function Cvs()
+    public function cvs()
     {
         return $this->hasMany('App\Cv');
     }
