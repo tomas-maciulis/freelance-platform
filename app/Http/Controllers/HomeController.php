@@ -21,7 +21,7 @@ class HomeController extends Controller
         //TODO: toast notifications
         return view('home')
             ->with([
-                'ads' => $this->adRepository->getFiltered($request->all())->sortByDesc('created_at'),
+                'ads' => $this->adRepository->getFiltered($request->all())->orderBy('created_at', 'desc')->paginate(50),
                 'adCategories' => WorkCategory::all()->sortBy('name'),
             ]);
     }
