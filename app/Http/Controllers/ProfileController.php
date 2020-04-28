@@ -29,7 +29,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $profile = Auth::user();
+        $user = Auth::user();
         $genders = Gender::all();
 
         //TODO: move date configuration to a service provider
@@ -50,7 +50,7 @@ class ProfileController extends Controller
 
         return view('profile.index')
             ->with([
-                'profile' => $profile,
+                'user' => $user,
                 'genders' => $genders,
                 'years' => $years,
                 'months' => $months,
@@ -81,5 +81,15 @@ class ProfileController extends Controller
         }
         $profile->update($requestData);
         return redirect()->route('home');
+    }
+
+    public function view(Request $request)
+    {
+        $user = Auth::user();
+
+        return view('profile.view')
+            ->with([
+                'user' => $user,
+            ]);
     }
 }

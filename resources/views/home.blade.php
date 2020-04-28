@@ -1,5 +1,5 @@
 @extends('layout.basic')
 @section('content')
-    @include('home.ad.search', $adCategories)
-    @include('home.ad.list', $ads)
+    @include('asset.ad.search', $adCategories)
+    @include('asset.ad.list', $ads)
 @endsection

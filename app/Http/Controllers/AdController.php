@@ -6,6 +6,7 @@ use App\Ad;
 use App\WorkCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AdController extends Controller
@@ -55,5 +56,35 @@ class AdController extends Controller
         Ad::create($adData);
 
         return redirect(route('home'));
+    }
+
+    public function remember(Request $request)
+    {
+        $user = Auth::user();
+
+        $user->rememberedAds()->attach($request->id);
+
+        return redirect()->back();
+    }
+
+    public function forget(Request $request)
+    {
+        $user = Auth::user();
+
+        $user->rememberedAds()->detach($request->id);
+
+        return redirect()->back();
+    }
+
+    public function remembered(Request $request)
+    {
+        $user = Auth::user();
+        $ads = $user->rememberedAds;
+
+        return view('ad.remembered')
+            ->with([
+                'ads' => $ads,
+                'user' => $user,
+            ]);
     }
 }

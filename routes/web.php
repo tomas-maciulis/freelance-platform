@@ -14,12 +14,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/ad/new', 'AdController@create')->name('ad.create')->middleware('auth');
-Route::post('/ad/new', 'AdController@store')->name('ad.store')->middleware('auth');
-Route::get('/ad/{id}', 'AdController@view')->name('ad.view');
-Route::get('/profile', 'ProfileController@index')->name('profile.index')->middleware('auth');
-Route::post('/profile', 'ProfileController@update')->name('profile.update')->middleware('auth');
+
+/**
+ * All routes related to ads
+ */
+Route::prefix('ad')->group(function () {
+    Route::middleware('auth')->group(function () {
+        Route::get('new', 'AdController@create')->name('ad.create');
+        Route::post('new', 'AdController@store')->name('ad.store');
+        Route::get('saved', 'AdController@remembered')->name('ad.remembered');
+        Route::post('remember/{id}', 'AdController@remember')->name('ad.remember');
+        Route::post('forget/{id}', 'AdController@forget')->name('ad.forget');
+    });
+    Route::get('{id}', 'AdController@view')->name('ad.view');
+});
+
+/**
+ * All routes related to profile
+ */
+Route::prefix('profile')->middleware('auth')->group(function () {
+    Route::get('/', 'ProfileController@index')->name('profile.index');
+    Route::post('/', 'ProfileController@update')->name('profile.update');
+    Route::get('{id}', 'ProfileController@view')->name('profile.view');
+});
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

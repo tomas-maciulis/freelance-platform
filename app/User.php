@@ -54,7 +54,11 @@ class User extends Authenticatable
      */
     public function getFullNameAttribute()
     {
-        return "$this->first_name $this->last_name";
+        if (isset($this->first_name) || isset($this->last_name)) {
+            return "$this->first_name $this->last_name";
+        } else {
+            return null;
+        }
     }
 
     public function ads() {
@@ -70,7 +74,7 @@ class User extends Authenticatable
     }
 
     public function rememberedAds() {
-        return $this->belongsToMany('App\Ad', 'remembered_ads')->withTimestamps();
+        return $this->belongsToMany('App\Ad', 'remembered_ads');
     }
 
     public function gender() {
