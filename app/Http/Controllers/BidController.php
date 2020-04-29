@@ -29,6 +29,7 @@ class BidController extends Controller
 
     public function store(Request $request)
     {
+//        TODO: check if ad didn't hire anyone
         $user = Auth::user();
         $requestData = $request->except('_token');
 
@@ -43,6 +44,7 @@ class BidController extends Controller
 
         return redirect()->route('ad.view', $request->ad_id);
     }
+
     public function destroy(Request $request)
     {
         $user = Auth::user();
@@ -50,6 +52,26 @@ class BidController extends Controller
         $this->bidValidator->validateOwnership($user, $bid);
 
         $bid->delete();
+
+        return redirect()->back();
+    }
+
+    public function hire(Request $request)
+    {
+        $user = Auth::user();
+        $ad = Ad::where('id', $request->ad_id)->firstOrFail();
+        $bid = Bid::where('id', $request->bid_id)->firstOrFail();
+
+        if (!$user->ads->contains($ad)) {
+            abort('403', 'Unauthorized action.');
+        }
+
+        if (!$ad->bids->contains($bid)) {
+            abort('403', 'Unauthorized action.');
+        }
+
+        $ad->bid_id = $bid->id;
+        $ad->save();
 
         return redirect()->back();
     }

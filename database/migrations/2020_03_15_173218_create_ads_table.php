@@ -17,6 +17,7 @@ class CreateAdsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedSmallInteger('work_category_id');
+            $table->unsignedBigInteger('bid_id')->nullable();
             $table->string('title', 100);
             $table->text('body');
             $table->decimal('price_floor', 8,2);
@@ -27,6 +28,8 @@ class CreateAdsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('work_category_id')->references('id')->on('work_categories');
+//            TODO: make this work
+//            $table->foreign('bid_id')->references('id')->on('bids');
         });
     }
 

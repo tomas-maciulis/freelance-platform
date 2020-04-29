@@ -33,6 +33,7 @@ Route::prefix('ad')->group(function () {
     Route::prefix('bid')->middleware('auth')->group(function () {
         Route::post('new', 'BidController@store')->name('ad.bid.store');
         Route::post('delete', 'BidController@destroy')->name('ad.bid.destroy');
+        Route::post('hire', 'BidController@hire')->name('ad.bid.hire');
     });
 
     Route::get('{id}', 'AdController@view')->name('ad.view');

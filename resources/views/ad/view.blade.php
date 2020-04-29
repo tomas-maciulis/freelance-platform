@@ -15,7 +15,7 @@
 
     <div class="mt-32">
         <span class="text-2xl">Bids</span>
-        @unless($user->ads->contains($ad))
+        @unless($user->ads->contains($ad) || isset($ad->bid_id))
 
 {{--            TODO: Move form to another file--}}
         <div class="mt-5">

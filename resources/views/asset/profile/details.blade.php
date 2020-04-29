@@ -1,4 +1,12 @@
 <div class="bg-white w-full px-8 pt-6 pb-8 mb-4 relative">
+    @if(isset($user->email))
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                Email
+            </label>
+            {{ $user->email }}
+        </div>
+    @endif
     @if(isset($user->full_name))
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">

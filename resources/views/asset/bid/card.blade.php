@@ -12,6 +12,19 @@
                      <button type="submit" class="text-sm hover:text-red-500">Delete</button>
                  </form>
              @endif
+             @if($user->ads->contains($ad))
+                 @unless($ad->bid_id == $bid->id)
+                     <form method="post" action="{{ route('ad.bid.hire') }}">
+                         @csrf
+                         <input name="bid_id" value="{{ $bid->id }}" hidden>
+                         <input name="ad_id" value="{{ $ad->id }}" hidden>
+                         <button type="submit" class="text-sm hover:text-red-500">Hire</button>
+                     </form>
+                 @endunless
+             @endif
+             @if(isset($ad->bid_id))
+                 <span>Hired</span>
+             @endif
          </div>
          <span class="text-lg mb-5">{{ $bid->body }}</span><br>
      </div>
