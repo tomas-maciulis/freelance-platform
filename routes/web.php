@@ -26,6 +26,15 @@ Route::prefix('ad')->group(function () {
         Route::post('remember/{id}', 'AdController@remember')->name('ad.remember');
         Route::post('forget/{id}', 'AdController@forget')->name('ad.forget');
     });
+
+    /**
+     * All routes related to bids
+     */
+    Route::prefix('bid')->middleware('auth')->group(function () {
+        Route::post('new', 'BidController@store')->name('ad.bid.store');
+        Route::post('delete', 'BidController@destroy')->name('ad.bid.destroy');
+    });
+
     Route::get('{id}', 'AdController@view')->name('ad.view');
 });
 

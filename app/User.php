@@ -89,4 +89,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Cv');
     }
+
+    public function bids()
+    {
+        return $this->hasMany('App\Bid');
+    }
 }

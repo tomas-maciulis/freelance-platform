@@ -18,6 +18,7 @@ class AdController extends Controller
         return view('ad.view')
             ->with([
                 'ad' => $ad,
+                'user' => Auth::user(),
             ]);
     }
 

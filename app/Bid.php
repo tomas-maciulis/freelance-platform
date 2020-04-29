@@ -9,6 +9,8 @@ class Bid extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = ['ad_id', 'cost', 'body'];
+
     public function user() {
         return $this->belongsTo('App\User');
     }

@@ -5,7 +5,7 @@
         </div>
         <div class="relative w-1/2 sm:w-2/6 lg:w-1/4">
             @include('asset.ad.price', [$ad])
-            <span class="absolute bottom-0 m-1 text-gray-800">0 bids</span><br>
+            <span class="absolute bottom-0 m-1 text-gray-800">Bids: {{ isset($ad->bids) ? $ad->bids->count() : 0 }}</span><br>
         </div>
         <div class="relative w-full md:w-1/4">
             <div class="absolute bottom-0 right-0 p-1 md:w-full md:text-center">

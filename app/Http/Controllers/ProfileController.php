@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Gender;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -85,7 +86,7 @@ class ProfileController extends Controller
 
     public function view(Request $request)
     {
-        $user = Auth::user();
+        $user = User::where('id', $request->id)->firstOrFail();
 
         return view('profile.view')
             ->with([
