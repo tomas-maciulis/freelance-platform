@@ -38,4 +38,37 @@ Route::prefix('profile')->middleware('auth')->group(function () {
     Route::get('{id}', 'ProfileController@view')->name('profile.view');
 });
 
+/**
+ * All routes related to cv
+ */
+Route::prefix('cv')->middleware('auth')->group(function () {
+    Route::get('/', 'CvController@index')->name('cv.index');
+    Route::get('view/{id}', 'CvController@view')->name('cv.view');
+    Route::get('new', 'CvController@create')->name('cv.create');
+    Route::post('new', 'CvController@store')->name('cv.store');
+    Route::get('{id}/edit', 'CvController@edit')->name('cv.edit');
+    Route::post('{id}/edit', 'CvController@update')->name('cv.update');
+    Route::post('{id}/delete', 'CvController@destroy')->name('cv.destroy');
+
+    /**
+     * All routes related to education
+     */
+    Route::prefix('{id}/education')->middleware('auth')->group(function () {
+        Route::get('new', 'EducationController@create')->name('cv.education.new');
+        Route::post('new', 'EducationController@store')->name('cv.education.store');
+        Route::post('edit/{educationId}', 'EducationController@update')->name('cv.education.update');
+        Route::post('{educationId}/destroy', 'EducationController@destroy')->name('cv.education.destroy');
+    });
+
+    /**
+     * All routes related to job experience
+     */
+    Route::prefix('{id}/experience')->middleware('auth')->group(function () {
+        Route::get('new', 'ExperienceController@create')->name('cv.experience.new');
+        Route::post('new', 'ExperienceController@store')->name('cv.experience.store');
+        Route::post('edit/{experienceId}', 'ExperienceController@update')->name('cv.experience.update');
+        Route::post('{experienceId}/destroy', 'ExperienceController@destroy')->name('cv.experience.destroy');
+    });
+});
+
 Auth::routes();

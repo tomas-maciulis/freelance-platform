@@ -9,6 +9,8 @@ class JobExperience extends Model
 {
     use softDeletes;
 
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
+
     public function cv()
     {
         return $this->belongsTo('App\Cv');

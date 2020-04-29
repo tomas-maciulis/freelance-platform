@@ -9,17 +9,20 @@ class Cv extends Model
 {
     use softDeletes;
 
+    protected $fillable = ['name', 'introduction'];
+
     public function user()
+
     {
         return $this->belongsTo('App\User');
     }
 
-    public function education()
+    public function educations()
     {
         return $this->hasMany('App\Education');
     }
 
-    public function JobExperiences()
+    public function jobExperiences()
     {
         return $this->hasMany('App\JobExperience');
     }

@@ -9,6 +9,9 @@ class Education extends Model
 {
     use softDeletes;
 
+    protected $table = 'educations';
+    protected $fillable = ['cv_id', 'education_degree_id', 'education_provider', 'specialty'];
+
     public function degree()
     {
         return $this->belongsTo('App\EducationDegree');
@@ -17,10 +20,5 @@ class Education extends Model
     public function cv()
     {
         return $this->belongsTo('App\Cv');
-    }
-
-    public function workCategory()
-    {
-        return $this->belongsTo('App\WorkCategory');
     }
 }
