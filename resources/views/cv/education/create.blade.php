@@ -28,7 +28,7 @@
             <select class="shadow appearance-none border bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " id="education_degree_id" type="number" name="education_degree_id" autocomplete="education_degree_id" autofocus>
                 <option value="">----</option>
                 @foreach($educationDegrees as $educationDegree)
-                    <option value="{{ $educationDegree->id }}">{{ $educationDegree->name }}</option>
+                    <option value="{{ $educationDegree->id }}" @if(old('education_degree_id') == $educationDegree->id) selected  @endif>{{ $educationDegree->name }}</option>
                 @endforeach
             </select>
             @error('education_degree_id')

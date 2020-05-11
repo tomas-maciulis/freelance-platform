@@ -78,7 +78,7 @@ class ProfileController extends Controller
 
         $validator = $this->validator($requestData);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
         $profile->update($requestData);
         return redirect()->route('home');

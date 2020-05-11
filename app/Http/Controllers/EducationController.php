@@ -52,7 +52,7 @@ class EducationController extends Controller
         $this->cvValidator->validateOwnership($user, $cv);
         $validator = $this->educationValidator($requestData);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $education = new Education($requestData);

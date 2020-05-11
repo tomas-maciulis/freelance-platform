@@ -55,7 +55,7 @@ class ExperienceController extends Controller
         $this->cvValidator->validateOwnership($user, $cv);
         $validator = $this->experienceValidator($requestData);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $education = new JobExperience($requestData);

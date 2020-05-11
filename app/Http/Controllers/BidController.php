@@ -35,7 +35,7 @@ class BidController extends Controller
 
         $validator = $this->bidValidator($requestData);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $bid = new Bid($requestData);

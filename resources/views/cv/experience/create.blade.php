@@ -29,7 +29,7 @@
             <select class="shadow appearance-none border bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " id="work_category_id" type="number" name="work_category_id" autocomplete="work_category_id" autofocus>
                 <option value="">----</option>
                 @foreach($workCategories as $workCategory)
-                    <option value="{{ $workCategory->id }}">{{ $workCategory->name }}</option>
+                    <option value="{{ $workCategory->id }}" @if(old('work_category_id') == $workCategory->id) selected @endif>{{ $workCategory->name }}</option>
                 @endforeach
             </select>
             @error('work_category_id')

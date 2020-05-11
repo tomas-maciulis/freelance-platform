@@ -53,7 +53,7 @@ class CvController extends Controller
 
         $validator = $this->cvValidator($requestData);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $cv = new Cv($requestData);
@@ -87,7 +87,7 @@ class CvController extends Controller
         $this->cvValidator->validateOwnership($user, $cv);
         $validator = $this->cvValidator($requestData);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $cv->update($requestData);
