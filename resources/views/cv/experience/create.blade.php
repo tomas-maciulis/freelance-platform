@@ -63,6 +63,6 @@
             <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
             @enderror
         </div>
-        @include('asset.form.button.important', ['type' => 'submit', 'title' => 'Add education', 'parameters' => 'float-right'])
+        @include('asset.form.button.important', ['type' => 'submit', 'title' => 'Add experience', 'parameters' => 'float-right'])
     </form>
 @endsection
