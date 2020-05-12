@@ -70,6 +70,19 @@ class AdController extends Controller
         return redirect(route('home'));
     }
 
+    public function destroy(Request $request)
+    {
+        $user = Auth::user();
+        $ad = Ad::where('id', $request->id)->firstOrFail();
+
+        if ($user->ads->contains($ad)) {
+            $ad->delete();
+            return redirect()->back();
+        } else {
+            return abort('403');
+        }
+    }
+
     public function remember(Request $request)
     {
         $user = Auth::user();
@@ -94,6 +107,18 @@ class AdController extends Controller
         $ads = $user->rememberedAds;
 
         return view('ad.remembered')
+            ->with([
+                'ads' => $ads,
+                'user' => $user,
+            ]);
+    }
+
+    public function myAds(Request $request)
+    {
+        $user = Auth::user();
+        $ads = $user->ads->sortByDesc('created_at');
+
+        return view('ad.my')
             ->with([
                 'ads' => $ads,
                 'user' => $user,

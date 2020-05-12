@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
-use App\Bid;
 use App\PrivateMessage;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;

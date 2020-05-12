@@ -1,5 +1,5 @@
 <div class="flex">
-    <div class="bg-gray-150 p-3 m-3 text-right w-1/2">
+    <div class="bg-gray-300 p-3 m-3 text-left w-1/2 rounded-lg">
         <div class="text-left">
             <span class="text-lg text-black">
                 {{ $message->sender->full_name }}

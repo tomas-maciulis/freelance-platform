@@ -22,7 +22,9 @@ Route::prefix('ad')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('new', 'AdController@create')->name('ad.create');
         Route::post('new', 'AdController@store')->name('ad.store');
+        Route::post('{id}/delete', 'AdController@destroy')->name('ad.delete');
         Route::get('saved', 'AdController@remembered')->name('ad.remembered');
+        Route::get('my-ads', 'AdController@myAds')->name('ad.my');
         Route::post('remember/{id}', 'AdController@remember')->name('ad.remember');
         Route::post('forget/{id}', 'AdController@forget')->name('ad.forget');
         Route::get('{id}/chat', 'ChatController@view')->name('chat.view');

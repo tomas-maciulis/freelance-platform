@@ -16,10 +16,17 @@
                             <button type="submit" class="text-sm hover:text-red-500">Forget</button>
                         </form>
                     @else
-                        <form method="post" action="{{ route('ad.remember', $ad->id) }}">
-                            @csrf
-                            <button type="submit" class="text-sm hover:text-red-500">Save</button>
-                        </form>
+                        @unless($ad->user->id == $user->id)
+                            <form method="post" action="{{ route('ad.remember', $ad->id) }}">
+                                @csrf
+                                <button type="submit" class="text-sm hover:text-red-500">Save</button>
+                            </form>
+                        @else
+                            <form method="post" action="{{ route('ad.delete', $ad->id) }}">
+                                @csrf
+                                <button type="submit" class="text-sm hover:text-red-500">Delete</button>
+                            </form>
+                        @endunless
                     @endif
                 @endauth
 {{--                TODO: make it compatible with remembered ads list--}}
