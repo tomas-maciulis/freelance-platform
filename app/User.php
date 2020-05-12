@@ -94,4 +94,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Bid');
     }
+
+    public function work()
+    {
+        return $this->hasMany('App\Ad');
+    }
 }

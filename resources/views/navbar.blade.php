@@ -5,8 +5,9 @@
     @include('asset.button.regular', ['link' => route('home'), 'title' => 'Home'])
     @auth
         @include('asset.button.regular', ['link' => route('profile.index'), 'title' => 'Profile'])
-            @include('asset.button.regular', ['link' => route('ad.remembered'), 'title' => 'Saved ads'])
-            @include('asset.button.regular', ['link' => route('cv.index'), 'title' => 'CV'])
+        @include('asset.button.regular', ['link' => route('ad.remembered'), 'title' => 'Saved ads'])
+        @include('asset.button.regular', ['link' => route('work.index'), 'title' => 'My work'])
+        @include('asset.button.regular', ['link' => route('cv.index'), 'title' => 'CV'])
         <form method="post" action="{{ route('logout') }}">
             @csrf
             @include('asset.form.button.regular', ['type' => 'submit', 'title' => 'Logout', 'parameters' => 'absolute right-0'])

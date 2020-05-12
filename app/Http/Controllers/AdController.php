@@ -3,22 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use App\Repositories\UserRepository;
 use App\WorkCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AdController extends Controller
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function view(Request $request)
     {
         $ad = Ad::where('id', $request->id)->firstOrFail();
+        $user = Auth::user();
+        $userWork = $this->userRepository->getWork($user->id)->pluck('id')->toArray();
+        $isHired = in_array($ad->id, $userWork);
 
         return view('ad.view')
             ->with([
                 'ad' => $ad,
                 'user' => Auth::user(),
+                'isHired' => $isHired,
             ]);
     }
 

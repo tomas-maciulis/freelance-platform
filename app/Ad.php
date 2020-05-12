@@ -8,6 +8,10 @@ class Ad extends Model
 {
     protected $guarded = [];
 
+    public function getWorkerAttribute() {
+        return Bid::where('id', $this->bid_id)->first()->user;
+    }
+
     public function reviews() {
         return $this->hasMany('App\Review');
     }

@@ -6,23 +6,25 @@
      <div class="w-full">
          <div class="text-right mr-3">
              @auth
-                 @if($user->bids->contains($bid))
-                     <form method="post" action="{{ route('ad.bid.destroy') }}">
-                         @csrf
-                         <input name="id" value="{{ $bid->id }}" hidden>
-                         <button type="submit" class="text-sm hover:text-red-500">Delete</button>
-                     </form>
-                 @endif
-                 @if($user->ads->contains($ad))
-                     @unless($ad->bid_id == $bid->id)
-                         <form method="post" action="{{ route('ad.bid.hire') }}">
+                 @unless(isset($ad->bid_id))
+                     @if($user->bids->contains($bid))
+                         <form method="post" action="{{ route('ad.bid.destroy') }}" onsubmit="return confirm('Are you sure you want to delete your offer?');">
                              @csrf
-                             <input name="bid_id" value="{{ $bid->id }}" hidden>
-                             <input name="ad_id" value="{{ $ad->id }}" hidden>
-                             <button type="submit" class="text-sm hover:text-red-500">Hire</button>
+                             <input name="id" value="{{ $bid->id }}" hidden>
+                             <button type="submit" class="text-sm hover:text-red-500">Delete</button>
                          </form>
-                     @endunless
-                 @endif
+                     @endif
+                     @if($user->ads->contains($ad))
+                         @unless($ad->bid_id == $bid->id)
+                             <form method="post" action="{{ route('ad.bid.hire') }}">
+                                 @csrf
+                                 <input name="bid_id" value="{{ $bid->id }}" hidden>
+                                 <input name="ad_id" value="{{ $ad->id }}" hidden>
+                                 <button type="submit" class="text-sm hover:text-red-500">Hire</button>
+                             </form>
+                         @endunless
+                     @endif
+                 @endunless
              @endauth
              @if(isset($ad->bid_id))
                  <span>Hired</span>

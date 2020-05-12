@@ -1,5 +1,10 @@
 @extends('layout.basic')
 @section('content')
+    @if($isHired || (isset($ad->bid_id) && $ad->user == $user))
+        <div class="my-3">
+            @include('asset.button.important', ['title' => 'Open chat', 'link' => route('chat.view', $ad->id)])
+        </div>
+    @endif
     <span class="text-2xl">{{ $ad->title }}</span>
     @include('asset.ad.price', [
         $ad,

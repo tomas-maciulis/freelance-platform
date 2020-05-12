@@ -5,9 +5,8 @@ namespace App\Repositories;
 
 
 use App\Ad;
-use App\Repositories\Interfaces\AdInterface;
 
-class AdRepository extends Repository implements AdInterface
+class AdRepository extends Repository
 {
     private $ad;
 

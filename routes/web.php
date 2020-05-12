@@ -25,6 +25,8 @@ Route::prefix('ad')->group(function () {
         Route::get('saved', 'AdController@remembered')->name('ad.remembered');
         Route::post('remember/{id}', 'AdController@remember')->name('ad.remember');
         Route::post('forget/{id}', 'AdController@forget')->name('ad.forget');
+        Route::get('{id}/chat', 'ChatController@view')->name('chat.view');
+        Route::post('{id}/chat', 'ChatController@storeMessage')->name('message.store');
     });
 
     /**
@@ -79,6 +81,14 @@ Route::prefix('cv')->middleware('auth')->group(function () {
         Route::post('edit/{experienceId}', 'ExperienceController@update')->name('cv.experience.update');
         Route::post('{experienceId}/destroy', 'ExperienceController@destroy')->name('cv.experience.destroy');
     });
+});
+
+/**
+ * All routes related to work
+ */
+Route::prefix('work')->middleware('auth')->group(function () {
+    Route::get('/', 'WorkController@index')->name('work.index');
+    Route::get('{id}', 'WorkController@view')->name('work.view');
 });
 
 Auth::routes();

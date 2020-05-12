@@ -39,7 +39,7 @@ class CvController extends Controller
 
     public function view()
     {
-        //
+        // TODO: CV view
     }
 
     public function create(Request $request)
