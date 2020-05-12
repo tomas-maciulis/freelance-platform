@@ -53,6 +53,7 @@ Route::prefix('profile')->middleware('auth')->group(function () {
     Route::post('/', 'ProfileController@update')->name('profile.update');
     Route::get('{id}', 'ProfileController@view')->name('profile.view');
 });
+Route::get('discover', 'ProfileController@discover')->name('profile.discover');
 
 /**
  * All routes related to cv

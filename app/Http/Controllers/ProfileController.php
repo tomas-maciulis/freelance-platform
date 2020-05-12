@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Gender;
 use App\User;
+use App\WorkCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -91,6 +92,26 @@ class ProfileController extends Controller
         return view('profile.view')
             ->with([
                 'user' => $user,
+            ]);
+    }
+
+    public function discover(Request $request)
+    {
+        $profiles = User::all()->sortBy('first_name');
+        if ($request->name) {
+            $matchedProfiles = [];
+            foreach ($profiles as $profile) {
+                if (strpos(strtolower($profile->full_name), strtolower($request->name)) !== false) {
+                    array_push($matchedProfiles, $profile);
+                }
+            }
+        } else {
+            $matchedProfiles = $profiles;
+        }
+
+        return view('profile.discover')
+            ->with([
+                'users' => $matchedProfiles,
             ]);
     }
 }
