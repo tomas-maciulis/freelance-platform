@@ -29,6 +29,8 @@ Route::prefix('ad')->group(function () {
         Route::post('forget/{id}', 'AdController@forget')->name('ad.forget');
         Route::get('{id}/chat', 'ChatController@view')->name('chat.view');
         Route::post('{id}/chat', 'ChatController@storeMessage')->name('message.store');
+        Route::get('{id}/deliver', 'WorkController@deliver')->name('work.deliver');
+        Route::post('{id}/deliver', 'WorkController@store')->name('work.store');
     });
 
     /**

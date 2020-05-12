@@ -23,6 +23,8 @@ class CreateAdsTable extends Migration
             $table->decimal('price_floor', 8,2);
             $table->decimal('price_ceiling', 8,2);
             $table->unsignedSmallInteger('active_for');
+            $table->string('product_url')->nullable();
+            $table->text('product_instructions')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
