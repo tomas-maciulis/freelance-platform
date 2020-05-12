@@ -6,7 +6,7 @@
         <div class="relative w-full md:w-1/4">
             <div class="absolute bottom-0 right-0 p-1 md:w-full md:text-center">
                 @if($user->cvs->contains($cv->id))
-                    <form method="post" action="{{ route('cv.destroy', $cv->id) }}">
+                    <form method="post" action="{{ route('cv.destroy', $cv->id) }}" onsubmit="return confirm('Are you sure you want to delete CV named \'' + {{ $cv->name }} + '\'?');">
                         <input name="cv_id" value="{{ $cv->id }}" hidden>
                         @csrf
                         <button type="submit" class="text-sm hover:text-red-500">Delete</button>
