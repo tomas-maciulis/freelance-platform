@@ -18,6 +18,7 @@ class CreateCvsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name')->nullable();
             $table->text('introduction')->nullable();
+            $table->text('qualification')->nullable();
             $table->boolean('is_visible')->default(False);
             $table->timestamps();
             $table->softDeletes();

@@ -22,6 +22,7 @@ class CvController extends Controller
         return Validator::make($data, [
             'name' => ['string', 'max:255'],
             'introduction' => ['string', 'max:10000', 'nullable'],
+            'qualification' => ['string', 'max:10000', 'nullable'],
         ]);
     }
 
@@ -93,7 +94,7 @@ class CvController extends Controller
         $cv->update($requestData);
         $cv->save();
 
-        return redirect()->route('cv.index');
+        return redirect()->back();
     }
 
     public function destroy(Request $request)

@@ -9,7 +9,7 @@ class Cv extends Model
 {
     use softDeletes;
 
-    protected $fillable = ['name', 'introduction'];
+    protected $fillable = ['name', 'introduction', 'qualification'];
 
     public function user()
 
