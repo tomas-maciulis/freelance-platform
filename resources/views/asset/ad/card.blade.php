@@ -22,7 +22,7 @@
                                 <button type="submit" class="text-sm hover:text-red-500">Save</button>
                             </form>
                         @else
-                            <form method="post" action="{{ route('ad.delete', $ad->id) }}">
+                            <form method="post" action="{{ route('ad.delete', $ad->id) }}" onsubmit="return confirm('Are you sure you want to delete ad named \'' + {{ $ad->title }} + '\'?');">
                                 @csrf
                                 <button type="submit" class="text-sm hover:text-red-500">Delete</button>
                             </form>
