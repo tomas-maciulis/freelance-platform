@@ -5,7 +5,7 @@
     <div class="w-full">
         <div class="text-right mr-3">
             {{--                TODO: fix routes not to duplicate use all ids in GET and POST methods--}}
-            <form method="post" action="{{ route('cv.experience.destroy', ['id' => $cv->id, 'experienceId' => $experience->id]) }}" onsubmit="return confirm('Are you sure you want to delete \'' + {{ $experience->occupation }} + '\' experience?');">
+            <form method="post" action="{{ route('cv.experience.destroy', ['id' => $cv->id, 'experienceId' => $experience->id]) }}" onsubmit="return confirm('Are you sure you want to delete experience?');">
                 @csrf
                 <input name="cv_id" value="{{ $cv->id }}" hidden>
                 <input name="job_experience_id" value="{{ $experience->id }}" hidden>

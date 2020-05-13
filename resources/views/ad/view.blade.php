@@ -6,6 +6,9 @@
             @if($isHired)
                 @include('asset.button.important', ['title' => 'Deliver product', 'link' => route('work.deliver', $ad->id)])
             @endif
+            @if($ad->product_url)
+                @include('asset.button.important', ['title' => 'View delivery', 'link' => route('work.viewDelivery', $ad->id)])
+            @endif
         </div>
     @endif
     <span class="text-2xl">{{ $ad->title }}</span>

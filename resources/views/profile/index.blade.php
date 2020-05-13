@@ -4,6 +4,9 @@
     @include('navbar')
 @endsection
 @section('content')
+    <div class="my-2">
+        @include('asset.button.important', ['title' => 'View public', 'link' => route('profile.view', $user->id)])
+    </div>
         <form method="post" action="{{ route('profile.update') }}" class="bg-white w-full px-8 pt-6 pb-8 mb-4 relative">
             @csrf
 {{--            TODO: email update--}}

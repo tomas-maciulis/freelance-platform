@@ -30,7 +30,9 @@ Route::prefix('ad')->group(function () {
         Route::get('{id}/chat', 'ChatController@view')->name('chat.view');
         Route::post('{id}/chat', 'ChatController@storeMessage')->name('message.store');
         Route::get('{id}/deliver', 'WorkController@deliver')->name('work.deliver');
+        Route::get('{id}/view-delivery', 'WorkController@viewDelivery')->name('work.viewDelivery');
         Route::post('{id}/deliver', 'WorkController@store')->name('work.store');
+        Route::post('{id}/rate', 'WorkController@storeRating')->name('work.rate');
     });
 
     /**
@@ -52,6 +54,7 @@ Route::prefix('profile')->middleware('auth')->group(function () {
     Route::get('/', 'ProfileController@index')->name('profile.index');
     Route::post('/', 'ProfileController@update')->name('profile.update');
     Route::get('{id}', 'ProfileController@view')->name('profile.view');
+    Route::post('{id}/review', 'ProfileController@storeReview')->name('review.store');
 });
 Route::get('discover', 'ProfileController@discover')->name('profile.discover');
 

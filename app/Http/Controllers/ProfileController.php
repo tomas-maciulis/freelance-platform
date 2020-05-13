@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Gender;
+use App\Review;
 use App\User;
 use App\WorkCategory;
 use Illuminate\Http\Request;
@@ -26,6 +27,14 @@ class ProfileController extends Controller
             'phone_number' => ['string', 'max:50', 'nullable'],
             'gender_id' => ['exists:genders,id', 'nullable'],
             'birth_date' => ['date', 'nullable'],
+        ]);
+    }
+
+    protected function reviewValidator(array $data)
+    {
+        return Validator::make($data, [
+            'rating' => ['number', 'max:5'],
+            'body' => ['text', 'max:10000', 'nullable'],
         ]);
     }
 
@@ -88,10 +97,12 @@ class ProfileController extends Controller
     public function view(Request $request)
     {
         $user = User::where('id', $request->id)->firstOrFail();
+        $reviews = Review::where('rated_user_id', $user->id)->get();
 
         return view('profile.view')
             ->with([
                 'user' => $user,
+                'reviews' => $reviews,
             ]);
     }
 
@@ -113,5 +124,14 @@ class ProfileController extends Controller
             ->with([
                 'users' => $matchedProfiles,
             ]);
+    }
+
+    public function storeReview(Request $request)
+    {
+        $user = Auth::user();
+        $requestData = $request->except('_token');
+
+
+        $review = new Review($requestData);
     }
 }

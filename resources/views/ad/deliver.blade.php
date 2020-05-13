@@ -13,7 +13,7 @@
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="product_instructions">
-                Introduction
+                Instruction
             </label>
             <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product_instructions" type="text" name="product_instructions" rows="30" maxlength="10000">{{ old('product_instructions') ?? $ad->product_instructions }}</textarea>
             @error('product_instructions')

@@ -15,8 +15,8 @@ class Ad extends Model
         return Bid::where('id', $this->bid_id)->first()->user;
     }
 
-    public function reviews() {
-        return $this->hasMany('App\Review');
+    public function review() {
+        return $this->hasOne('App\Review');
     }
 
     public function bids() {
