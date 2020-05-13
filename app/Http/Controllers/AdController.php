@@ -22,8 +22,12 @@ class AdController extends Controller
     {
         $ad = Ad::where('id', $request->id)->firstOrFail();
         $user = Auth::user();
-        $userWork = $this->userRepository->getWork($user->id)->pluck('id')->toArray();
-        $isHired = in_array($ad->id, $userWork);
+        if ($user) {
+            $userWork = $this->userRepository->getWork($user->id)->pluck('id')->toArray();
+            $isHired = in_array($ad->id, $userWork);
+        } else {
+            $isHired = false;
+        }
 
         return view('ad.view')
             ->with([
