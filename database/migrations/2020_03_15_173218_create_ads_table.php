@@ -17,16 +17,21 @@ class CreateAdsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedSmallInteger('work_category_id');
+            $table->unsignedBigInteger('bid_id')->nullable();
             $table->string('title', 100);
             $table->text('body');
             $table->decimal('price_floor', 8,2);
             $table->decimal('price_ceiling', 8,2);
             $table->unsignedSmallInteger('active_for');
+            $table->string('product_url')->nullable();
+            $table->text('product_instructions')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('work_category_id')->references('id')->on('work_categories');
+//            TODO: make this work
+//            $table->foreign('bid_id')->references('id')->on('bids');
         });
     }
 

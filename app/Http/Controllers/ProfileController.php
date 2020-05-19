@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Gender;
+use App\Review;
+use App\User;
+use App\WorkCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -27,9 +30,17 @@ class ProfileController extends Controller
         ]);
     }
 
+    protected function reviewValidator(array $data)
+    {
+        return Validator::make($data, [
+            'rating' => ['number', 'max:5'],
+            'body' => ['text', 'max:10000', 'nullable'],
+        ]);
+    }
+
     public function index()
     {
-        $profile = Auth::user();
+        $user = Auth::user();
         $genders = Gender::all();
 
         //TODO: move date configuration to a service provider
@@ -50,7 +61,7 @@ class ProfileController extends Controller
 
         return view('profile.index')
             ->with([
-                'profile' => $profile,
+                'user' => $user,
                 'genders' => $genders,
                 'years' => $years,
                 'months' => $months,
@@ -77,9 +88,50 @@ class ProfileController extends Controller
 
         $validator = $this->validator($requestData);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
         $profile->update($requestData);
         return redirect()->route('home');
+    }
+
+    public function view(Request $request)
+    {
+        $user = User::where('id', $request->id)->firstOrFail();
+        $reviews = Review::where('rated_user_id', $user->id)->get();
+
+        return view('profile.view')
+            ->with([
+                'user' => $user,
+                'reviews' => $reviews,
+            ]);
+    }
+
+    public function discover(Request $request)
+    {
+        $profiles = User::all()->sortBy('first_name');
+        if ($request->name) {
+            $matchedProfiles = [];
+            foreach ($profiles as $profile) {
+                if (strpos(strtolower($profile->full_name), strtolower($request->name)) !== false) {
+                    array_push($matchedProfiles, $profile);
+                }
+            }
+        } else {
+            $matchedProfiles = $profiles;
+        }
+
+        return view('profile.discover')
+            ->with([
+                'users' => $matchedProfiles,
+            ]);
+    }
+
+    public function storeReview(Request $request)
+    {
+        $user = Auth::user();
+        $requestData = $request->except('_token');
+
+
+        $review = new Review($requestData);
     }
 }

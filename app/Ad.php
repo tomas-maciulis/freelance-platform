@@ -3,13 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ad extends Model
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
-    public function reviews() {
-        return $this->hasMany('App\Review');
+    public function getWorkerAttribute() {
+        return Bid::where('id', $this->bid_id)->first()->user;
+    }
+
+    public function review() {
+        return $this->hasOne('App\Review');
     }
 
     public function bids() {
@@ -17,7 +24,7 @@ class Ad extends Model
     }
 
     public function category() {
-        return $this->hasOne('App\AdCategory');
+        return $this->hasOne('App\WorkCategory');
     }
 
     public function remembered() {

@@ -4,6 +4,9 @@
     @include('navbar')
 @endsection
 @section('content')
+    <div class="my-2">
+        @include('asset.button.important', ['title' => 'View public', 'link' => route('profile.view', $user->id)])
+    </div>
         <form method="post" action="{{ route('profile.update') }}" class="bg-white w-full px-8 pt-6 pb-8 mb-4 relative">
             @csrf
 {{--            TODO: email update--}}
@@ -12,7 +15,7 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">
                     First name
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="first_name" type="text" name="first_name" value="{{ $profile->first_name }}" autocomplete="first_name" autofocus>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="first_name" type="text" name="first_name" value="{{ $user->first_name }}" autocomplete="first_name" autofocus>
                 @error('first_name')
                 <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
                 @enderror
@@ -21,7 +24,7 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="last_name">
                     Last name
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="last_name" type="text" name="last_name" value="{{ $profile->last_name }}" autocomplete="last_name" autofocus>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="last_name" type="text" name="last_name" value="{{ $user->last_name }}" autocomplete="last_name" autofocus>
                 @error('last_name')
                 <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
                 @enderror
@@ -30,7 +33,7 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="phone_number">
                     Phone number
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone_number" type="text" name="phone_number" value="{{ $profile->phone_number }}" autocomplete="phone_number" autofocus>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone_number" type="text" name="phone_number" value="{{ $user->phone_number }}" autocomplete="phone_number" autofocus>
                 @error('phone_number')
                 <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
                 @enderror
@@ -45,7 +48,7 @@
                             <option value="">----</option>
                             @foreach($years as $year)
 {{--                                TODO: move date checking logic to the controller--}}
-                                <option value="{{ $year }}" @if($year === ($profile->birth_date ? $profile->birth_date->year : '')) selected @endif>{{ $year }}</option>
+                                <option value="{{ $year }}" @if($year === ($user->birth_date ? $user->birth_date->year : '')) selected @endif>{{ $year }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -53,7 +56,7 @@
                         <select class="shadow appearance-none border bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " id="birth_month" type="number" name="birth_month" autocomplete="birth_month" autofocus>
                             <option value="">--</option>
                             @foreach($months as $month)
-                                <option value="{{ $month }}" @if($month === ($profile->birth_date ? $profile->birth_date->month : '')) selected @endif>{{ $month }}</option>
+                                <option value="{{ $month }}" @if($month === ($user->birth_date ? $user->birth_date->month : '')) selected @endif>{{ $month }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -61,7 +64,7 @@
                         <select class="shadow appearance-none border bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " id="birth_day" type="number" name="birth_day" autocomplete="birth_day" autofocus>
                             <option value="">--</option>
                             @foreach($days as $day)
-                                <option value="{{ $day }}" @if($day === ($profile->birth_date ? $profile->birth_date->day : '')) selected @endif>{{ $day }}</option>
+                                <option value="{{ $day }}" @if($day === ($user->birth_date ? $user->birth_date->day : '')) selected @endif>{{ $day }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -77,7 +80,7 @@
                 <div class="w-32">
                     <select class="capitalize shadow appearance-none border bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " id="gender_id" name="gender_id" autocomplete="gender_id" autofocus>
                         @foreach($genders as $gender)
-                            <option class="capitalize" value="{{ $gender->id }}" @if($gender->id === $profile->gender_id) selected @endif>{{ $gender->name }}</option>
+                            <option class="capitalize" value="{{ $gender->id }}" @if($gender->id === $user->gender_id) selected @endif>{{ $gender->name }}</option>
                         @endforeach
                     </select>
                 </div>

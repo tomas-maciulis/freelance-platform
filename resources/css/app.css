@@ -11,3 +11,12 @@
 .ignore-scrollbar-width {
     margin-left: calc(100vw - 100%);
 }
+
+.pagination {
+    padding-left: 0;
+    list-style: none;
+}
+
+.pagination > li {
+    display: inline-block;
+}

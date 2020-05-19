@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PrivateMessage extends Model
 {
+    use SoftDeletes;
+
     public function ad() {
         return $this->belongsTo('App\Ad');
     }

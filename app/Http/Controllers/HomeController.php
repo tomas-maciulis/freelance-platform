@@ -5,24 +5,25 @@ namespace App\Http\Controllers;
 use App\WorkCategory;
 use App\Repositories\AdRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    protected $ad;
+    protected $adRepository;
 
-    public function __construct(AdRepository $ad)
+    public function __construct(AdRepository $adRepository)
     {
-        $this->ad = $ad;
+        $this->adRepository = $adRepository;
     }
 
     public function index(Request $request)
     {
-        //TODO: paginate ads
         //TODO: toast notifications
         return view('home')
             ->with([
-                'ads' => $this->ad->getFiltered($request->all())->sortByDesc('created_at'),
+                'ads' => $this->adRepository->getFiltered($request->all())->orderBy('created_at', 'desc')->paginate(50),
                 'adCategories' => WorkCategory::all()->sortBy('name'),
+                'user' => Auth::user(),
             ]);
     }
 }
