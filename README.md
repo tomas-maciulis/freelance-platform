@@ -41,3 +41,8 @@ Optionally, you can populate database with randomized data, mainly for testing p
 ```
 php artisn db:seed
 ```
+After this operation, default user has following credentials:
+```
+administrator@test.com:password
+```
+Every other auto-generated user has the same password as well.
